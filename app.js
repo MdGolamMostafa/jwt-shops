@@ -7,6 +7,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const shopsRouter = require('./routes/shops');
 
+const shopsMainController = require('./controllers/user.controller');
+
 const app = express();
 app.use(logger('dev'));
 app.use(express.json());
@@ -15,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/shops', shopsRouter);
+app.use('/shops',shopsMainController.isAuthenticated, shopsRouter);
 
 module.exports = app;  
 
